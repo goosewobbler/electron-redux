@@ -8,9 +8,6 @@
 	"author": "McKayla Washburn",
 	"repository": "https://github.com/partheseas/electron-redux",
 	"bugs": "https://github.com/partheseas/electron-redux/issues",
-	"files": [
-		"target/*"
-	],
 	"keywords": [
 		"electron",
 		"redux"
