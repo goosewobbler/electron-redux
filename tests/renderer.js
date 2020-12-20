@@ -2,6 +2,7 @@ const { addItem, decrement, increment, store } = require("./store/renderer");
 
 store.subscribe(() => {
 	const state = store.getState();
+	// eslint-disable-next-line no-console
 	console.log("state", state);
 	h.innerHTML = state.count;
 

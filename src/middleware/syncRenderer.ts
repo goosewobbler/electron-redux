@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import {
 	Action,
+	AnyAction,
 	applyMiddleware,
 	Middleware,
 	Reducer,
@@ -15,12 +16,13 @@ import {
 	validateAction,
 } from "../helpers";
 
-export async function getRendererState(callback: (state: unknown) => void) {
+async function getMainState() {
 	// Electron will throw an error if there isn't a handler for the channel.
 	// We catch it so that we can throw a more useful error
 	const state = await ipcRenderer
 		.invoke("mckayla.electron-redux.FETCH_STATE")
 		.catch((error) => {
+			// eslint-disable-next-line no-console
 			console.error(error);
 			throw new Error(
 				"No Redux store found in main process. Did you use the syncMain enhancer?",
@@ -29,7 +31,8 @@ export async function getRendererState(callback: (state: unknown) => void) {
 
 	// We do some fancy hydration on certain types like Map and Set.
 	// See also `freeze`
-	callback(JSON.parse(state, hydrate));
+	const hydratedState = JSON.parse(state, hydrate);
+	return hydratedState;
 }
 
 /**
@@ -37,6 +40,7 @@ export async function getRendererState(callback: (state: unknown) => void) {
  * state asynchronously, because blocking the thread feels bad for potentially
  * large stores.
  */
+// TODO: This erases generics and replaces them with unknown, which is kind of bad
 type InternalAction = ReturnType<typeof replaceState>;
 
 /**
@@ -50,15 +54,14 @@ const replaceState = <S>(state: S) => ({
 	meta: { scope: "local" },
 });
 
-const wrapReducer = (reducer: Reducer) => <S, A extends Action>(
-	state: S,
-	action: InternalAction | A,
-) => {
+const wrapReducer = <S = any, A extends Action<any> = AnyAction>(
+	reducer: Reducer<S, A>,
+): Reducer<S, InternalAction | A> => (state, action) => {
 	switch (action.type) {
 		case "mckayla.electron-redux.REPLACE_STATE":
-			return (action as InternalAction).payload;
+			return (action as InternalAction).payload as S;
 		default:
-			return reducer(state, action);
+			return reducer(state, action as A);
 	}
 };
 
@@ -90,8 +93,10 @@ export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 		// This is the reason we need to be an enhancer, rather than a middleware.
 		// We use this (along with the wrapReducer function above) to dispatch an
 		// action that initializes the store without needing to fetch it synchronously.
-		getRendererState((state) => {
-			store.dispatch(replaceState(state));
+		// I don't know why it yells about this "floating" when we clearly handle it
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		getMainState().then((mainState) => {
+			store.dispatch(replaceState(mainState));
 		});
 
 		// XXX: TypeScript is dumb. If you return the call to createStore

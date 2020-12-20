@@ -6,15 +6,18 @@ let previouslyInitialized: Error;
 
 export const preventDoubleInitialization = () => {
 	if (previouslyInitialized) {
+		// eslint-disable-next-line no-console
 		console.error(
 			new Error("electron-redux has already been attached to a store"),
 		);
-		console.error(previouslyInitialized);
+		throw previouslyInitialized;
 	}
 
 	// We are intentionally not actually throwing the error here, we just
 	// want to capture the call stack.
-	previouslyInitialized = new Error("Previously attached to a store");
+	previouslyInitialized = new Error(
+		"electron-redux was previously attached to a store here",
+	);
 };
 
 /**

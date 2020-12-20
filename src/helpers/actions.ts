@@ -8,13 +8,13 @@ type ActionMeta = {
 	scope?: "local" | string;
 };
 
+type GenericAction = FluxStandardAction<string, unknown, ActionMeta>;
+
 /**
  * stopForwarding allows you to give it an action, and it will return an
  * equivalent action that will only play in the current process
  */
-export const stopForwarding = (
-	action: FluxStandardAction<string, unknown, ActionMeta>,
-) => ({
+export const stopForwarding = (action: GenericAction): GenericAction => ({
 	...action,
 	meta: {
 		...action.meta,

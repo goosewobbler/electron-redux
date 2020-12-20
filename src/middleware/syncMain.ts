@@ -15,11 +15,11 @@ import {
 } from "../helpers";
 
 const middleware: Middleware = (store) => {
-	ipcMain.handle("mckayla.electron-redux.FETCH_STATE", async () => {
+	ipcMain.handle("mckayla.electron-redux.FETCH_STATE", () => {
 		// Stringify the current state, and freeze it to preserve certain types
 		// that you might want to use in your state, but aren't JSON serializable
 		// by default.
-		return JSON.stringify(store.getState(), freeze);
+		return Promise.resolve(JSON.stringify(store.getState(), freeze));
 	});
 
 	// When receiving an action from a renderer

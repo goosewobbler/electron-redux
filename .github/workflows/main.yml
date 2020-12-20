@@ -2,9 +2,9 @@ name: main
 
 on:
     push:
-        branches: [master]
+        branches: [main]
     pull_request:
-        branches: [master]
+        branches: [main]
 
 jobs:
     build:
@@ -26,5 +26,5 @@ jobs:
             - run: yarn prettier --ignore-path .gitignore --check .
 
             - run: yarn build
-            # Need tests plz
-            # - run: yarn workspace @mckayla/electron-redux-e2e test
+            - run: yarn lint
+            - run: yarn test

@@ -5,6 +5,7 @@ const url = require("url");
 const { increment, store } = require("./store/main");
 
 store.subscribe(() => {
+	// eslint-disable-next-line no-console
 	console.log(store.getState());
 });
 
