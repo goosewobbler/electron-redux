@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
 		"declaration": true,
-		"lib": ["dom", "esnext"],
+		"lib": ["dom", "es2019"],
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"outDir": "target",
 		"strict": true,
-		"target": "esnext"
+		"target": "es2019"
 	},
 	"include": ["src/**/*"]
 }
