@@ -6,8 +6,12 @@
 
 ![electron-redux data flow](https://cloud.githubusercontent.com/assets/307162/20675737/385ce59e-b585-11e6-947e-3867e77c783d.png)
 
-Keeps your state in sync across all of your Electron processes by playing your actions
-in all of them.
+Keeps your state in sync across all of your Electron processes by playing your
+actions across all of them.
+
+## Usage
+
+### with nodeIntegration enabled
 
 ```javascript
 // in the main process
@@ -21,9 +25,43 @@ import { syncRenderer } from "@mckayla/electron-redux";
 const store = createStore(reducer, syncRenderer);
 ```
 
-That's it! Just add these enhancers to where you initialize your store. As long
-as your reducers are pure/deterministic (which they already should be) your state
-should be reproduced accurately across all of the processes.
+### with contextIsolation enabled
+
+To use this package with contextIsolation enabled, you'll need to use the
+store enhancers as shown above, some sort of bundler (such as Webpack),
+and _one_ of the options presented below. Probably the second one, as you'll
+likely want to run some code of your own during the preload execution.
+
+```javascript
+// when initializing a BrowserWindow
+const view = new BrowserWindow({
+	webPreferences: {
+		contextIsolation: true,
+		preload: require.resolve("@mckayla/electron-redux/preload"),
+	},
+});
+```
+
+or
+
+```javascript
+// in your own preload script
+import "@mckayla/electron-redux/preload";
+```
+
+If you use Webpack, you'll also need to prevent electron from being linked to
+your renderer bundle. You can do this by aliasing electron to the polyfill that
+we provide.
+
+````javascript
+// in your webpack.config.js
+module.exports = {
+	resolve: {
+		alias: {
+			electron: require.resolve("@mckayla/electron-redux/electron"),
+		},
+	},
+};
 
 ## Actions
 
@@ -56,7 +94,7 @@ const myLocalActionCreator = () => ({
 		scope: "local", // only play the action locally
 	},
 });
-```
+````
 
 We also provide a utility function for this
 

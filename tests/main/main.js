@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 
-const { increment, store } = require("./store/main");
+const { increment, store } = require("../store/main");
 
 store.subscribe(() => {
 	// eslint-disable-next-line no-console
@@ -21,14 +21,16 @@ const createWindow = () => {
 		width: 1380,
 		height: 830,
 		webPreferences: {
-			nodeIntegration: true,
+			contextIsolation: true,
+			// nodeIntegration: true,
+			preload: require.resolve("../../preload"),
 		},
 	});
 
 	// and load the index.html of the app.
 	view.loadURL(
 		url.format({
-			pathname: path.join(__dirname, "index.html"),
+			pathname: path.join(__dirname, "../renderer/index.html"),
 			protocol: "file:",
 			slashes: true,
 		}),
@@ -50,8 +52,6 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
 	while (views.length < 2) {
 		createWindow();
 	}

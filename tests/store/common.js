@@ -1,6 +1,6 @@
 const init = () => ({
 	count: 0,
-	testSet: new Set(["a", "b", "c"]),
+	items: new Set(["a", "b", "c"]),
 });
 
 // type Action =
@@ -36,9 +36,9 @@ exports.reducer = (state = init(), action) => {
 		case "mckayla.electron-redux.ADJUST_BY":
 			return { ...state, count: state.count + action.payload.amount };
 		case "mckayla.electron-redux.ADD_ITEM": {
-			const copy = new Set(state.testSet);
+			const copy = new Set(state.items);
 			copy.add(action.payload.item);
-			return { ...state, testSet: copy };
+			return { ...state, items: copy };
 		}
 		default:
 			return state;

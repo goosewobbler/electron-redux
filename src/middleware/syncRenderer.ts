@@ -1,4 +1,3 @@
-import { ipcRenderer } from "electron";
 import {
 	Action,
 	AnyAction,
@@ -9,31 +8,11 @@ import {
 	StoreEnhancer,
 } from "redux";
 
-import {
-	hydrate,
-	preventDoubleInitialization,
-	stopForwarding,
-	validateAction,
-} from "../helpers";
+import { preventDoubleInitialization, validateAction } from "../helpers";
+import * as bindings from "../renderer/bindings";
 
-async function getMainState() {
-	// Electron will throw an error if there isn't a handler for the channel.
-	// We catch it so that we can throw a more useful error
-	const state = await ipcRenderer
-		.invoke("mckayla.electron-redux.FETCH_STATE")
-		.catch((error) => {
-			// eslint-disable-next-line no-console
-			console.error(error);
-			throw new Error(
-				"No Redux store found in main process. Did you use the syncMain enhancer?",
-			);
-		});
-
-	// We do some fancy hydration on certain types like Map and Set.
-	// See also `freeze`
-	const hydratedState = JSON.parse(state, hydrate);
-	return hydratedState;
-}
+const reduxBindings =
+	typeof __temp_mckayla !== "undefined" ? __temp_mckayla : bindings;
 
 /**
  * This next bit is all just for being able to fill the store with the correct
@@ -66,14 +45,11 @@ const wrapReducer = <S = any, A extends Action<any> = AnyAction>(
 };
 
 const middleware: Middleware = (store) => {
-	// When receiving an action from main
-	ipcRenderer.on("mckayla.electron-redux.ACTION", (_, action: Action) => {
-		store.dispatch(stopForwarding(action));
-	});
+	reduxBindings.subscribeToActions(store);
 
 	return (next) => (action) => {
 		if (validateAction(action)) {
-			ipcRenderer.send("mckayla.electron-redux.ACTION", action);
+			reduxBindings.sendAction(action);
 		}
 
 		return next(action);
@@ -95,7 +71,7 @@ export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 		// action that initializes the store without needing to fetch it synchronously.
 		// I don't know why it yells about this "floating" when we clearly handle it
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		getMainState().then((mainState) => {
+		reduxBindings.getMainState().then((mainState) => {
 			store.dispatch(replaceState(mainState));
 		});
 
