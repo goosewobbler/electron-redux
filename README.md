@@ -1,8 +1,7 @@
 # electron-redux
 
-[![build status](https://github.com/partheseas/electron-redux/workflows/main/badge.svg)](https://github.com/partheseas/electron-redux/actions)
 [![package version](https://mckay.la/vbadge/@mckayla%2Felectron-redux/afbdf7)](https://npmjs.com/package/@mckayla/electron-redux)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![build status](https://github.com/partheseas/electron-redux/workflows/main/badge.svg)](https://github.com/partheseas/electron-redux/actions)
 
 ![electron-redux data flow](https://cloud.githubusercontent.com/assets/307162/20675737/385ce59e-b585-11e6-947e-3867e77c783d.png)
 
@@ -10,8 +9,6 @@ Keeps your state in sync across all of your Electron processes by playing your
 actions across all of them.
 
 ## Usage
-
-### with nodeIntegration enabled
 
 ```javascript
 // in the main process
@@ -25,35 +22,29 @@ import { syncRenderer } from "@mckayla/electron-redux";
 const store = createStore(reducer, syncRenderer);
 ```
 
-### with contextIsolation enabled
+```javascript
+// in your preload script
+import "@mckayla/electron-redux/preload";
+```
 
-To use this package with contextIsolation enabled, you'll need to use the
-store enhancers as shown above, some sort of bundler (such as Webpack),
-and _one_ of the options presented below. Probably the second one, as you'll
-likely want to run some code of your own during the preload execution.
+If you don't have your own preload script, you can specify the provided preload
+script directly whenever you initialize a `BrowserWindow`
 
 ```javascript
 // when initializing a BrowserWindow
 const view = new BrowserWindow({
 	webPreferences: {
-		contextIsolation: true,
 		preload: require.resolve("@mckayla/electron-redux/preload"),
 	},
 });
 ```
 
-or
-
-```javascript
-// in your own preload script
-import "@mckayla/electron-redux/preload";
-```
-
-If you use Webpack, you'll also need to prevent electron from being linked to
+If you use Webpack to bundle your renderer code, and you don't have `nodeIntegration`
+enabled, you'll also need to prevent the electron module from being referenced by
 your renderer bundle. You can do this by aliasing electron to the polyfill that
 we provide.
 
-````javascript
+```javascript
 // in your webpack.config.js
 module.exports = {
 	resolve: {
@@ -62,6 +53,7 @@ module.exports = {
 		},
 	},
 };
+```
 
 ## Actions
 
@@ -94,11 +86,11 @@ const myLocalActionCreator = () => ({
 		scope: "local", // only play the action locally
 	},
 });
-````
+```
 
 We also provide a utility function for this
 
-```
+```javascript
 import { stopForwarding } from "@mckayla/electron-redux";
 dispatch(stopForwarding(action));
 ```

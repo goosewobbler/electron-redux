@@ -1,7 +1,37 @@
-import { ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 import { Action, MiddlewareAPI } from "redux";
 
 import { hydrate, stopForwarding } from "../helpers";
+
+declare global {
+	interface Bridge {
+		getMainState: typeof getMainState;
+		subscribeToActions: typeof subscribeToActions;
+		sendAction: typeof sendAction;
+	}
+
+	interface Window {
+		__temp_mckayla: Bridge;
+	}
+
+	const __temp_mckayla: Bridge;
+}
+
+export const preload = () => {
+	const bridge = {
+		getMainState,
+		subscribeToActions,
+		sendAction,
+	};
+
+	// contextBridge will throw an error if contextIsolation is not enabled, so
+	// we try to see if it works, and if not we mutate the window directly.
+	try {
+		contextBridge.exposeInMainWorld("__temp_mckayla", bridge);
+	} catch {
+		window.__temp_mckayla = bridge;
+	}
+};
 
 export async function getMainState() {
 	const state = await ipcRenderer

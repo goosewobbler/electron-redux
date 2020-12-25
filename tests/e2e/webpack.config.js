@@ -3,22 +3,17 @@
 const path = require("path");
 
 module.exports = {
-	mode: "development",
 	resolve: {
 		alias: {
-			electron: require.resolve("../electron"),
+			electron: require.resolve("@mckayla/electron-redux/electron"),
 		},
 	},
 
 	entry: {
-		renderer: "./renderer/renderer.js",
+		renderer: "./src/renderer/renderer.js",
 	},
 	output: {
 		path: path.join(__dirname, "target"),
 		filename: "[name].js",
-	},
-
-	module: {
-		rules: [{ use: require.resolve("babel-loader") }],
 	},
 };

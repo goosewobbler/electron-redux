@@ -2,12 +2,19 @@
 <html>
 	<head>
 		<title>electron-redux</title>
+
 		<meta
 			http-equiv="Content-Security-Policy"
-			content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';"
+			content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; font-src https://fonts.gstatic.com/; script-src 'self' 'unsafe-eval';"
 		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap"
+		/>
+		<link rel="stylesheet" type="text/css" href="renderer.css" />
 	</head>
-	<body style="background-color: white">
+	<body>
 		<h1>electron-redux</h1>
 
 		<h2 id="count-display">{{count-display}}</h2>
@@ -22,7 +29,7 @@
 
 		<script
 			type="application/javascript"
-			src="../target/renderer.js"
+			src="../../target/renderer.js"
 		></script>
 	</body>
 </html>

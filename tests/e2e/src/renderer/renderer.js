@@ -13,7 +13,9 @@ function update(state) {
 	h.innerHTML = count;
 	s.innerHTML = "";
 	for (const p of items) {
-		s.innerHTML += `${p} `;
+		const n = document.createElement("code");
+		n.innerHTML = p;
+		s.appendChild(n);
 	}
 }
 

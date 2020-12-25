@@ -9,10 +9,6 @@ import {
 } from "redux";
 
 import { preventDoubleInitialization, validateAction } from "../helpers";
-import * as bindings from "../renderer/bindings";
-
-const reduxBindings =
-	typeof __temp_mckayla !== "undefined" ? __temp_mckayla : bindings;
 
 /**
  * This next bit is all just for being able to fill the store with the correct
@@ -45,11 +41,11 @@ const wrapReducer = <S = any, A extends Action<any> = AnyAction>(
 };
 
 const middleware: Middleware = (store) => {
-	reduxBindings.subscribeToActions(store);
+	__temp_mckayla.subscribeToActions(store);
 
 	return (next) => (action) => {
 		if (validateAction(action)) {
-			reduxBindings.sendAction(action);
+			__temp_mckayla.sendAction(action);
 		}
 
 		return next(action);
@@ -58,6 +54,12 @@ const middleware: Middleware = (store) => {
 
 export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 	preventDoubleInitialization();
+
+	if (typeof __temp_mckayla === "undefined") {
+		throw new Error(
+			"This renderer process is not properly configured. Did you import @mckayla/electron-redux/preload in your preload script?",
+		);
+	}
 
 	return (reducer, state) => {
 		const store = createStore(
@@ -71,7 +73,7 @@ export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 		// action that initializes the store without needing to fetch it synchronously.
 		// I don't know why it yells about this "floating" when we clearly handle it
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		reduxBindings.getMainState().then((mainState) => {
+		__temp_mckayla.getMainState().then((mainState) => {
 			store.dispatch(replaceState(mainState));
 		});
 

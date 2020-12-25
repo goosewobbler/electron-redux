@@ -22,8 +22,7 @@ const createWindow = () => {
 		height: 830,
 		webPreferences: {
 			contextIsolation: true,
-			// nodeIntegration: true,
-			preload: require.resolve("../../preload"),
+			preload: require.resolve("@mckayla/electron-redux/preload"),
 		},
 	});
 
