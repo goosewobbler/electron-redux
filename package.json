@@ -10,6 +10,7 @@
 	"bugs": "https://github.com/partheseas/electron-redux/issues",
 	"devDependencies": {
 		"@mckayla/eslint-plugin": "^0.1.10",
+		"@mckayla/tsconfig": "^0.41.0",
 		"@types/jest": "^26.0.19",
 		"eslint": "^7.16.0",
 		"jest": "^26.6.3",

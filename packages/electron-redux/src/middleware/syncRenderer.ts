@@ -41,11 +41,11 @@ const wrapReducer = <S = any, A extends Action<any> = AnyAction>(
 };
 
 const middleware: Middleware = (store) => {
-	__temp_mckayla.subscribeToActions(store);
+	__ElectronReduxBridge.subscribeToActions(store);
 
 	return (next) => (action) => {
 		if (validateAction(action)) {
-			__temp_mckayla.sendAction(action);
+			__ElectronReduxBridge.sendAction(action);
 		}
 
 		return next(action);
@@ -55,7 +55,7 @@ const middleware: Middleware = (store) => {
 export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 	preventDoubleInitialization();
 
-	if (typeof __temp_mckayla === "undefined") {
+	if (typeof __ElectronReduxBridge === "undefined") {
 		throw new Error(
 			"This renderer process is not properly configured. Did you import @mckayla/electron-redux/preload in your preload script?",
 		);
@@ -73,7 +73,7 @@ export const syncRenderer: StoreEnhancer = (createStore: StoreCreator) => {
 		// action that initializes the store without needing to fetch it synchronously.
 		// I don't know why it yells about this "floating" when we clearly handle it
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		__temp_mckayla.getMainState().then((mainState) => {
+		__ElectronReduxBridge.getMainState().then((mainState) => {
 			store.dispatch(replaceState(mainState));
 		});
 

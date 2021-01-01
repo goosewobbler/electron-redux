@@ -11,10 +11,10 @@ declare global {
 	}
 
 	interface Window {
-		__temp_mckayla: Bridge;
+		__ElectronReduxBridge: Bridge;
 	}
 
-	const __temp_mckayla: Bridge;
+	const __ElectronReduxBridge: Bridge;
 }
 
 export const preload = () => {
@@ -27,9 +27,9 @@ export const preload = () => {
 	// contextBridge will throw an error if contextIsolation is not enabled, so
 	// we try to see if it works, and if not we mutate the window directly.
 	try {
-		contextBridge.exposeInMainWorld("__temp_mckayla", bridge);
+		contextBridge.exposeInMainWorld("__ElectronReduxBridge", bridge);
 	} catch {
-		window.__temp_mckayla = bridge;
+		window.__ElectronReduxBridge = bridge;
 	}
 };
 
