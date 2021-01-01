@@ -39,20 +39,31 @@ const view = new BrowserWindow({
 });
 ```
 
+### w/ Webpack
+
 If you use Webpack to bundle your renderer code, and you don't have `nodeIntegration`
-enabled, you'll also need to prevent the electron module from being referenced by
-your renderer bundle. You can do this by aliasing electron to the polyfill that
-we provide.
+enabled, you might also need to prevent the electron module from being includeded in
+your renderer bundle. You can do this by including the following in your Webpack config.
 
 ```javascript
 // in your webpack.config.js
 module.exports = {
 	resolve: {
 		alias: {
-			electron: require.resolve("@mckayla/electron-redux/electron"),
+			electron: false,
 		},
 	},
 };
+```
+
+### w/ Parcel (or Webpack)
+
+In your renderer code, you'll actually want to import the store enhancer from a submodule.
+
+```javascript
+// in your renderer processes
+import { syncRenderer } from "@mckayla/electron-redux/renderer";
+const store = createStore(reducer, syncRenderer);
 ```
 
 ## Actions
