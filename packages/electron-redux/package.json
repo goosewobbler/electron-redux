@@ -22,7 +22,7 @@
 	"scripts": {
 		"build": "tsc -p .",
 		"fmt": "prettier --ignore-path .gitignore --write .",
-		"lint": "eslint .",
+		"lint": "eslint src",
 		"smoke-test": "electron tests/main/main.js",
 		"test": "jest"
 	}
