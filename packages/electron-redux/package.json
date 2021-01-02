@@ -1,6 +1,6 @@
 {
 	"name": "@mckayla/electron-redux",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"license": "MIT",
 	"main": "target/index.js",
 	"types": "target/index.d.ts",
