@@ -1,7 +1,7 @@
 export function isPlainObject(value: any): value is Record<any, any> {
 	if (
 		!(typeof value === "object" && value !== null) ||
-		{}.toString.call(value) != "[object Object]"
+		{}.toString.call(value) !== "[object Object]"
 	) {
 		return false;
 	}
