@@ -7,5 +7,5 @@
 		"outDir": "target",
 		"target": "es2019"
 	},
-	"include": ["src/**/*"]
+	"include": ["renderer.d.ts", "src/**/*"]
 }
