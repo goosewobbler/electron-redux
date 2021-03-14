@@ -42,7 +42,7 @@ const view = new BrowserWindow({
 ### w/ Webpack
 
 If you use Webpack to bundle your renderer code, and you don't have `nodeIntegration`
-enabled, you might also need to prevent the electron module from being includeded in
+enabled, you might also need to prevent the electron module from being included in
 your renderer bundle. You can do this by including the following in your Webpack config.
 
 ```javascript
