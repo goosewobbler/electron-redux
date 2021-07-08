@@ -1,58 +1,79 @@
 {
-  "extends": [
-    "airbnb-typescript",
-    "airbnb/hooks",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:import/errors",
-    "plugin:import/typescript",
-    "plugin:import/warnings",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["jest", "import", "prettier", "@typescript-eslint", "react-hooks"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": { "jsx": true },
-    "ecmaVersion": 2021,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
-  },
+  "extends": ["airbnb", "prettier", "plugin:import/errors", "plugin:import/warnings"],
+  "plugins": ["import", "prettier"],
   "env": {
-    "node": true,
     "es6": true,
-    "jest": true,
-    "browser": true
+    "node": true
   },
   "rules": {
-    "radix": "off",
     "curly": "error",
-    "import/extensions": [
-      "error",
-      {
-        "ts": "never",
-        "tsx": "never",
-        "css": "always"
-      }
-    ],
+    "import/extensions": ["error", "never"],
     "import/no-default-export": "error",
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "no-param-reassign": ["error", { "props": false }],
-    "no-void": ["error", { "allowAsStatement": true }]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   },
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "node": {},
-      "typescript": {
-        "alwaysTryTypes": true
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "extends": [
+        "airbnb-typescript",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:import/errors",
+        "plugin:import/typescript",
+        "plugin:import/warnings",
+        "plugin:prettier/recommended"
+      ],
+      "plugins": ["jest", "import", "prettier", "@typescript-eslint", "react-hooks"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": { "jsx": true },
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "env": {
+        "node": true,
+        "es6": true,
+        "jest": true,
+        "browser": true
+      },
+      "rules": {
+        "radix": "off",
+        "curly": "error",
+        "import/extensions": [
+          "error",
+          {
+            "ts": "never",
+            "tsx": "never",
+            "css": "always"
+          }
+        ],
+        "import/no-default-export": "error",
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-param-reassign": ["error", { "props": false }],
+        "no-void": ["error", { "allowAsStatement": true }]
+      },
+      "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+          "node": {},
+          "webpack": {
+            "config": "./webpack.config.js"
+          },
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        },
+        "react": { "version": "detect" }
       }
-    },
-    "react": { "version": "detect" }
-  }
+    }
+  ]
 }
