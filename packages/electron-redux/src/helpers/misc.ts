@@ -5,19 +5,15 @@
 let previouslyInitialized: Error;
 
 export const preventDoubleInitialization = () => {
-	if (previouslyInitialized) {
-		// eslint-disable-next-line no-console
-		console.error(
-			new Error("electron-redux has already been attached to a store"),
-		);
-		throw previouslyInitialized;
-	}
+  if (previouslyInitialized) {
+    // eslint-disable-next-line no-console
+    console.error(new Error('electron-redux has already been attached to a store'));
+    throw previouslyInitialized;
+  }
 
-	// We are intentionally not actually throwing the error here, we just
-	// want to capture the call stack.
-	previouslyInitialized = new Error(
-		"electron-redux was previously attached to a store here",
-	);
+  // We are intentionally not actually throwing the error here, we just
+  // want to capture the call stack.
+  previouslyInitialized = new Error('electron-redux was previously attached to a store here');
 };
 
 /**
@@ -25,16 +21,12 @@ export const preventDoubleInitialization = () => {
  * runtime implementation of the TypeScript Omit<T, K> type.
  */
 export const trimProperty = <T extends keyof X, X>(prop: T, obj: X) => {
-	return Object.fromEntries(
-		Object.entries(obj).filter(([key]) => key !== prop),
-	) as Omit<X, T>;
+  return Object.fromEntries(Object.entries(obj).filter(([key]) => key !== prop)) as Omit<X, T>;
 };
 
 /**
  * Removes multiple properties from the given object.
  */
 export const trimProperties = <T extends keyof X, X>(props: T[], obj: X) => {
-	return Object.fromEntries(
-		Object.entries(obj).filter(([key]) => !props.includes(key as T)),
-	) as Omit<X, T>;
+  return Object.fromEntries(Object.entries(obj).filter(([key]) => !props.includes(key as T))) as Omit<X, T>;
 };

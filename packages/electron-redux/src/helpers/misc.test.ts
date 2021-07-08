@@ -1,11 +1,11 @@
-import { preventDoubleInitialization } from "./misc";
+import { preventDoubleInitialization } from './misc';
 
-test("calling preventDoubleInitialization twice throws", () => {
-	jest.spyOn(console, "error").mockImplementation(jest.fn());
+test('calling preventDoubleInitialization twice throws', () => {
+  jest.spyOn(console, 'error').mockImplementation(jest.fn());
 
-	expect(preventDoubleInitialization).not.toThrow();
-	expect(preventDoubleInitialization).toThrow();
+  expect(preventDoubleInitialization).not.toThrow();
+  expect(preventDoubleInitialization).toThrow();
 
-	// eslint-disable-next-line no-console
-	expect(console.error).toHaveBeenCalled();
+  // eslint-disable-next-line no-console
+  expect(console.error).toHaveBeenCalled();
 });
