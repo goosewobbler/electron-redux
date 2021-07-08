@@ -5,7 +5,6 @@ importers:
   .:
     specifiers:
       '@mckayla/eslint-plugin': ^0.1.10
-      '@mckayla/tsconfig': ^0.41.0
       '@types/jest': ^26.0.24
       eslint: ^7.30.0
       jest: ^27.0.6
@@ -14,7 +13,6 @@ importers:
       typescript: ^4.3.5
     devDependencies:
       '@mckayla/eslint-plugin': 0.1.10_eslint@7.30.0+typescript@4.3.5
-      '@mckayla/tsconfig': 0.41.0
       '@types/jest': 26.0.24
       eslint: 7.30.0
       jest: 27.0.6
@@ -703,10 +701,6 @@ packages:
       - eslint
       - supports-color
       - typescript
-    dev: true
-
-  /@mckayla/tsconfig/0.41.0:
-    resolution: {integrity: sha512-zzqefSZbRrXDyDYGzb2zccYNR/ym7b3S4jp5NaexLYhOmJsGtsFAQR2ob5zrJs+oXW+npLOyJPQ0LXT7I7yN/g==}
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
