@@ -5,10 +5,7 @@ import { syncMain } from '@goosewobbler/electron-redux';
 import { createReduxStore } from '../common/reduxStore';
 import { increment } from '../features/counter/counterSlice';
 
-const store = createReduxStore({
-  context: 'main',
-  syncFn: syncMain,
-});
+const store = createReduxStore(syncMain);
 
 store.subscribe(() => {
   // eslint-disable-next-line no-console
@@ -33,7 +30,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  view.loadURL(
+  void view.loadURL(
     url.format({
       pathname: path.join(__dirname, '../renderer/index.html'),
       protocol: 'file:',

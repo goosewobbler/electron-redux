@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AppState } from '../rootReducer';
+import { AppState } from '../../common/types';
 
 type Items = {
   items: Set<string>;

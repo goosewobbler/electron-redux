@@ -14,9 +14,6 @@ function render(reduxStore: Store): void {
   );
 }
 
-const reduxStore = createReduxStore({
-  context: 'renderer',
-  syncFn: syncRenderer,
-});
+const reduxStore = createReduxStore(syncRenderer);
 
 render(reduxStore);
