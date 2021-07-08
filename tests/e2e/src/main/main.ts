@@ -1,8 +1,14 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const url = require('url');
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import url from 'url';
+import { syncMain } from '@goosewobbler/electron-redux';
+import { createReduxStore } from '../common/reduxStore';
+import { increment } from '../features/counter/counterSlice';
 
-const { increment, store } = require('../store/main');
+const store = createReduxStore({
+  context: 'main',
+  syncFn: syncMain,
+});
 
 store.subscribe(() => {
   // eslint-disable-next-line no-console

@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>electron-redux</title>
-
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/; font-src https://fonts.gstatic.com/; script-src 'self' 'unsafe-eval';"
@@ -12,18 +11,7 @@
     <link rel="stylesheet" type="text/css" href="renderer.css" />
   </head>
   <body>
-    <h1>electron-redux</h1>
-
-    <h2 id="count-display">{{count-display}}</h2>
-    <button id="count-decrement">-</button>
-    <button id="count-increment">+</button>
-
-    <hr />
-
-    <p id="set-display">{{set-display}}</p>
-    <input type="text" id="set-input" value="{{set-input}}" />
-    <button id="set-confirm">+</button>
-
+    <div class="app"></div>
     <script type="application/javascript" src="../../target/renderer.js"></script>
   </body>
 </html>
