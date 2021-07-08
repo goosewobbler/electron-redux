@@ -14,9 +14,9 @@
     "strict": true,
     "declaration": true,
     "lib": ["dom", "es2019"],
-    "module": "commonjs",
+    "module": "es2020",
     "outDir": "target",
     "target": "es2019"
   },
-  "include": ["src/**/*"]
+  "include": ["./src/**/*"]
 }
