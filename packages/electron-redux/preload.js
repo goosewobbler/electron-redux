@@ -1,2 +1,2 @@
-const { preload } = require("./target/preload/preload");
+const { preload } = require('./target/preload/preload');
 preload();
