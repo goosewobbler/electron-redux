@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "pnpm run -r build",
-	"lint": "pnpm run -r lint",
+    "lint": "pnpm run -r lint",
     "format": "prettier --ignore-path .gitignore --write .",
     "smoke-test": "pnpm run --filter @goosewobbler/electron-redux-e2e start",
     "test": "pnpm run --filter @goosewobbler/electron-redux test"
