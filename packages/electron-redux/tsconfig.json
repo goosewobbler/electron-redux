@@ -1,11 +1,22 @@
 {
-	"extends": "@mckayla/tsconfig",
-	"compilerOptions": {
-		"declaration": true,
-		"lib": ["dom", "es2019"],
-		"module": "commonjs",
-		"outDir": "target",
-		"target": "es2019"
-	},
-	"include": ["src/**/*"]
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "declaration": true,
+    "lib": ["dom", "es2019"],
+    "module": "commonjs",
+    "outDir": "target",
+    "target": "es2019"
+  },
+  "include": ["src/**/*"]
 }
