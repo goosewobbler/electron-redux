@@ -58,6 +58,7 @@ app.on('ready', () => {
   }, 3000);
 
   createWindow();
+  createWindow();
 });
 
 // Quit when all windows are closed.
