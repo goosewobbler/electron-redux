@@ -10,7 +10,7 @@ actions across all of them.
 
 ## Differences with [@mckayla/electron-redux](https://github.com/partheseas/electron-redux)
 
-Updated dependencies, removed namespacing of actions.
+Updated dependencies, removed namespacing of actions, added preload typedefs and the E2E is more of a modern real-world case utilising React, React-Redux and Redux Toolkit.
 
 ## Usage
 
