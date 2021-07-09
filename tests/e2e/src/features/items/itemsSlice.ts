@@ -1,29 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../../common/types';
 
-type Items = {
-  items: Set<string>;
-};
+export type Items = string[];
 
-const initialState: Items = {
-  items: new Set(['a', 'b', 'c']),
-};
+const initialState: Items = ['a', 'b', 'c'];
 
 export const slice = createSlice({
   name: 'items',
   initialState,
   reducers: {
     addItem: (state, { payload: { item } }) => {
-      state.items.add(item);
+      return [...state, item];
     },
     removeItem: (state, { payload: { item } }) => {
-      state.items.delete(item);
+      return state.filter((stateItem) => stateItem !== item);
     },
   },
 });
 
 export const { addItem, removeItem } = slice.actions;
 
-export const selectItems = (state: AppState): Items['items'] => state.items;
+export const selectItems = (state: AppState) => state.items;
 
 export const itemsReducer = slice.reducer;

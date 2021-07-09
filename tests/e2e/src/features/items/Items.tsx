@@ -1,10 +1,10 @@
 import React, { ReactElement, useState, BaseSyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectItems, addItem, removeItem } from './itemsSlice';
+import { selectItems, addItem, removeItem, Items } from './itemsSlice';
 
 export function Items(): ReactElement {
   const [itemsInputValue, setItemsInputValue] = useState('');
-  const items: Set<string> = useSelector(selectItems);
+  const items: Items = useSelector(selectItems);
   const dispatch = useDispatch();
 
   const handleChange = (event: BaseSyntheticEvent): void => {

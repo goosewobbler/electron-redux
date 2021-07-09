@@ -1,4 +1,4 @@
 export type AppState = {
   count: number;
-  items: Set<string>;
+  items: string[];
 };
