@@ -15,7 +15,7 @@ export const slice = createSlice({
     decrement: (state) => {
       return state - 1;
     },
-    adjustBy: (state, { payload: { amount } }) => {
+    adjustBy: (state, { payload: { amount } }: { payload: { amount: number } }) => {
       return state + amount;
     },
   },
@@ -23,6 +23,6 @@ export const slice = createSlice({
 
 export const { increment, decrement, adjustBy } = slice.actions;
 
-export const selectCount = (state: AppState) => state.count;
+export const selectCount = (state: AppState): number => state.count;
 
 export const counterReducer = slice.reducer;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import { syncMain } from '@goosewobbler/electron-redux';
@@ -57,8 +58,8 @@ app.on('ready', () => {
     store.dispatch(increment());
   }, 3000);
 
-  createWindow();
-  createWindow();
+  void createWindow();
+  void createWindow();
 });
 
 // Quit when all windows are closed.

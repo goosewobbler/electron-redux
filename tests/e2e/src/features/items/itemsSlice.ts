@@ -1,15 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../../common/types';
 
-export type Items = string[];
-
-const initialState: Items = ['a', 'b', 'c'];
+const initialState: string[] = ['a', 'b', 'c'];
 
 export const slice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    addItem: (state, { payload: { item } }) => {
+    addItem: (state, { payload: { item } }: { payload: { item: string } }) => {
       return [...state, item];
     },
     removeItem: (state, { payload: { item } }) => {
@@ -20,6 +18,6 @@ export const slice = createSlice({
 
 export const { addItem, removeItem } = slice.actions;
 
-export const selectItems = (state: AppState) => state.items;
+export const selectItems = (state: AppState): string[] => state.items;
 
 export const itemsReducer = slice.reducer;
