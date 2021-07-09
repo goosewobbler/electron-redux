@@ -4,18 +4,18 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const templateParameters = {
-  rendererSrc: './renderer.js',
-  stylesheetHref: './renderer.css',
+  rendererSrc: `file:///${__dirname}/target/renderer.js`,
+  stylesheetHref: `file:///${__dirname}/target/renderer.css`,
 };
 
 module.exports = {
   entry: './src/renderer/renderer.tsx',
   output: {
     path: path.join(__dirname, 'target'),
-    filename: '[name].js',
+    filename: 'renderer.js',
   },
   mode: 'development',
-  target: 'web',
+  target: 'electron-renderer',
   module: {
     rules: [
       {
@@ -47,12 +47,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  cache: {
-    type: 'filesystem',
-    buildDependencies: {
-      config: [__filename],
-    },
   },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],

@@ -35,9 +35,11 @@
     "webpack-cli": "^4.7.2"
   },
   "scripts": {
-    "build": "pnpm build:main && pnpm build:renderer",
+    "clean": "rm -rf ./target",
+    "build": "pnpm build:main && pnpm build:renderer && pnpm build:preload",
     "build:main": "webpack --config ./webpack.main.config.js",
     "build:renderer": "webpack --config ./webpack.renderer.config.js",
+    "build:preload": "webpack --config ./webpack.preload.config.js",
     "lint": "eslint .",
     "start": "electron target/main.js"
   }

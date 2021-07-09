@@ -1,45 +1,38 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
-import url from 'url';
 import { syncMain } from '@goosewobbler/electron-redux';
 import { createReduxStore } from '../common/reduxStore';
 import { increment } from '../features/counter/counterSlice';
 
-const store = createReduxStore(syncMain);
-
-store.subscribe(() => {
-  // eslint-disable-next-line no-console
-  console.log(store.getState());
-});
-
-setInterval(() => {
-  store.dispatch(increment());
-}, 3000);
-
 const views = [];
 
-const createWindow = () => {
-  // Create the browser window.
+async function createWindow(): Promise<void> {
+  const preload = path.resolve(__dirname, './preload.js');
   const view = new BrowserWindow({
+    show: false,
     width: 1380,
     height: 830,
     webPreferences: {
       contextIsolation: true,
-      preload: require.resolve('@goosewobbler/electron-redux/preload'),
+      preload,
     },
   });
+  const url = `file:///${__dirname}/index.html`;
 
-  // and load the index.html of the app.
-  void view.loadURL(
-    url.format({
-      pathname: path.join(__dirname, '../renderer/index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }),
-  );
+  console.log('initialising view with preload', preload);
 
-  // Open the DevTools.
   view.webContents.openDevTools();
+
+  console.log('loading url', url);
+  void (await view.loadURL(url));
+
+  view.once('ready-to-show', () => {
+    console.log('ready to show');
+    view.webContents.once('dom-ready', () => {
+      console.log('dom ready');
+    });
+    view.show();
+  });
 
   // Emitted when the window is closed.
   view.on('closed', () => {
@@ -48,15 +41,24 @@ const createWindow = () => {
   });
 
   views.push(view);
-};
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  while (views.length < 2) {
-    createWindow();
-  }
+  const store = createReduxStore(syncMain);
+
+  store.subscribe(() => {
+    // eslint-disable-next-line no-console
+    console.log(store.getState());
+  });
+
+  setInterval(() => {
+    store.dispatch(increment());
+  }, 3000);
+
+  createWindow();
 });
 
 // Quit when all windows are closed.
@@ -67,7 +69,4 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  while (views.length < 2) {
-    createWindow();
-  }
 });

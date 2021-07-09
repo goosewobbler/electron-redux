@@ -5,9 +5,9 @@ module.exports = {
   entry: './src/main/main.ts',
   output: {
     path: path.join(__dirname, 'target'),
-    filename: '[name].js',
+    filename: 'main.js',
   },
-  mode: 'development',
+  mode: 'production',
   target: 'electron-main',
   module: {
     rules: [
@@ -36,12 +36,13 @@ module.exports = {
   },
   node: {
     global: true,
-    __dirname: true,
+    __dirname: false,
     __filename: true,
   },
   plugins: [new ForkTsCheckerWebpackPlugin()],
   externals: [
     ({ request }, callback) => {
+      console.log(request);
       if (request[0] === '.') {
         callback();
       } else {
