@@ -8,10 +8,10 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" />
-    <link rel="stylesheet" type="text/css" href="renderer.css" />
+    <link rel="stylesheet" type="text/css" href="<%= stylesheetHref %>" />
   </head>
   <body>
-    <div class="app"></div>
-    <script type="application/javascript" src="../../target/renderer.js"></script>
+    <div id="app"></div>
+    <script type="application/javascript" defer src="<%= rendererSrc %>"></script>
   </body>
 </html>
