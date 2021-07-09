@@ -23,9 +23,6 @@ async function createWindow(): Promise<void> {
 
   view.webContents.openDevTools();
 
-  console.log('loading url', url);
-  void (await view.loadURL(url));
-
   view.once('ready-to-show', () => {
     console.log('ready to show');
     view.webContents.once('dom-ready', () => {
@@ -40,6 +37,8 @@ async function createWindow(): Promise<void> {
     app.quit();
   });
 
+  console.log('loading url', url);
+  void (await view.loadURL(url));
   views.push(view);
 }
 
