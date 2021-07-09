@@ -42,7 +42,6 @@ module.exports = {
   plugins: [new ForkTsCheckerWebpackPlugin()],
   externals: [
     ({ request }, callback) => {
-      console.log(request);
       if (request[0] === '.') {
         callback();
       } else {
