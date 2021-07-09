@@ -68,7 +68,7 @@ module.exports = {
       templateParameters,
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: 'renderer.css',
     }),
   ],
 };
