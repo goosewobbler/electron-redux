@@ -4,5 +4,6 @@ tests/
 **/*.test.*
 
 !preload.js
+!preload.d.ts
 !renderer.d.ts
 !renderer.js
