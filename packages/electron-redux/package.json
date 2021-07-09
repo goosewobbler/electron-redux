@@ -1,6 +1,6 @@
 {
   "name": "@goosewobbler/electron-redux",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "target/index.js",
   "types": "target/index.d.ts",
