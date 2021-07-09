@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: pnpm i
-      - run: pnpm prettier --ignore-path .gitignore --check .
+      - run: pnpm prettier --check .
 
       - run: pnpm build
       - run: pnpm lint
