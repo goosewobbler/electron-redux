@@ -8,6 +8,9 @@ export const slice = createSlice({
   initialState,
   reducers: {
     addItem: (state, { payload: { item } }: { payload: { item: string } }) => {
+      if (state.includes(item)) {
+        return state;
+      }
       return [...state, item];
     },
     removeItem: (state, { payload: { item } }) => {
