@@ -15,14 +15,14 @@ export function Items(): ReactElement {
     <div>
       <p id="set-display">
         {Array.from(items).map((item) => (
-          <code>{item}</code>
+          <code key={item}>{item}</code>
         ))}
       </p>
       <input type="text" id="items-input" onChange={(event) => handleChange(event)} value={itemsInputValue} />
-      <button id="add-item" type="button" onClick={() => dispatch(addItem(itemsInputValue))}>
+      <button id="add-item" type="button" onClick={() => dispatch(addItem({ item: itemsInputValue }))}>
         +
       </button>
-      <button id="remove-item" type="button" onClick={() => dispatch(removeItem(itemsInputValue))}>
+      <button id="remove-item" type="button" onClick={() => dispatch(removeItem({ item: itemsInputValue }))}>
         -
       </button>
     </div>
