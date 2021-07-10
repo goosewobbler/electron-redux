@@ -12,7 +12,7 @@ const middleware: Middleware = (store) => {
   });
 
   // When receiving an action from a renderer
-  ipcMain.on('ACTION', (event, action: GenericFluxAction) => {
+  ipcMain.on('electron-redux.ACTION', (event, action: GenericFluxAction) => {
     const localAction = stopForwarding(action);
     store.dispatch(localAction);
 
@@ -20,7 +20,7 @@ const middleware: Middleware = (store) => {
     webContents.getAllWebContents().forEach((contents) => {
       // Ignore the renderer that sent the action
       if (contents.id !== event.sender.id) {
-        contents.send('ACTION', localAction);
+        contents.send('electron-redux.ACTION', localAction);
       }
     });
   });
@@ -28,7 +28,7 @@ const middleware: Middleware = (store) => {
   return (next) => (action) => {
     if (validateAction(action)) {
       webContents.getAllWebContents().forEach((contents) => {
-        contents.send('ACTION', action);
+        contents.send('electron-redux.ACTION', action);
       });
     }
 

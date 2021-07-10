@@ -47,11 +47,11 @@ export async function getMainState() {
 }
 
 export function subscribeToActions(store: MiddlewareAPI) {
-  ipcRenderer.on('ACTION', (_, action) => {
+  ipcRenderer.on('electron-redux.ACTION', (_, action) => {
     store.dispatch(stopForwarding(action));
   });
 }
 
 export function sendAction(action: Action) {
-  ipcRenderer.send('ACTION', action);
+  ipcRenderer.send('electron-redux.ACTION', action);
 }
