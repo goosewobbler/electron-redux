@@ -10,7 +10,12 @@ actions across all of them.
 
 ## Differences with [@mckayla/electron-redux](https://github.com/partheseas/electron-redux)
 
-Updated dependencies, removed namespacing of actions, added preload typedefs and the E2E is more of a modern real-world case utilising React, React-Redux and Redux Toolkit.
+- Updated dependencies
+- Added preload typedefs
+- Messed around with the build chain / tooling a bit - now a bit easier to see what is going on and uses PNPM instead of Yarn.
+- E2E is more of a modern real-world case utilising React.
+
+This was forked in order to better test electron-redux in an environment similar to an app I am building - I was having issues integrating it with a combination of Redux Toolkit, React-Redux and Redux-Offline. However after much shenanigans the issue was fixed by removing Redux Dev Tools - anyone having issues with this library syncing stores should try removing the Dev Tools in the first instance.
 
 ## Usage
 
