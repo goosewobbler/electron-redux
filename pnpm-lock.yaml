@@ -23,14 +23,14 @@ importers:
   packages/electron-redux:
     specifiers:
       '@types/jest': ^27.0.0
-      electron: ^13.1.6
+      electron: ^15.0.0
       jest: ^27.0.6
       redux: ^4.1.0
       ts-jest: ^27.0.3
       typescript: ^4.3.5
     devDependencies:
       '@types/jest': 27.4.0
-      electron: 13.1.6
+      electron: 15.3.6
       jest: 27.0.6
       redux: 4.1.0
       ts-jest: 27.0.3_jest@27.0.6+typescript@4.3.5
@@ -472,6 +472,24 @@ packages:
       sumchecker: 3.0.1
     optionalDependencies:
       global-agent: 2.2.0
+      global-tunnel-ng: 2.7.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@electron/get/1.13.1:
+    resolution: {integrity: sha512-U5vkXDZ9DwXtkPqlB45tfYnnYBN8PePp1z/XDCupnSpdrxT8/ThCv9WCwPLf9oqiSGZTkH6dx2jDUPuoXpjkcA==}
+    engines: {node: '>=8.6'}
+    dependencies:
+      debug: 4.3.2
+      env-paths: 2.2.1
+      fs-extra: 8.1.0
+      got: 9.6.0
+      progress: 2.0.3
+      semver: 6.3.0
+      sumchecker: 3.0.1
+    optionalDependencies:
+      global-agent: 3.0.0
       global-tunnel-ng: 2.7.1
     transitivePeerDependencies:
       - supports-color
@@ -2033,6 +2051,19 @@ packages:
       - supports-color
     dev: true
 
+  /electron/15.3.6:
+    resolution: {integrity: sha512-mOOTcZH/Vlq9GP3B8G3aMvZQ4eZyCjUZZpLccABqsPyLUMEixcdx750DQ7M+iHYyo0BWxj/JuHblzQXgNnPkfg==}
+    engines: {node: '>= 8.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@electron/get': 1.13.1
+      '@types/node': 14.17.5
+      extract-zip: 1.7.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /emittery/0.8.1:
     resolution: {integrity: sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==}
     engines: {node: '>=10'}
@@ -2835,6 +2866,20 @@ packages:
     dependencies:
       boolean: 3.1.2
       core-js: 3.15.2
+      es6-error: 4.1.1
+      matcher: 3.0.0
+      roarr: 2.15.4
+      semver: 7.3.5
+      serialize-error: 7.0.1
+    dev: true
+    optional: true
+
+  /global-agent/3.0.0:
+    resolution: {integrity: sha512-PT6XReJ+D07JvGoxQMkT6qji/jVNfX/h364XHZOWeRzy64sSFr+xJ5OX7LI3b4MPQzdL4H8Y8M0xzPpsVMwA8Q==}
+    engines: {node: '>=10.0'}
+    requiresBuild: true
+    dependencies:
+      boolean: 3.1.2
       es6-error: 4.1.1
       matcher: 3.0.0
       roarr: 2.15.4
