@@ -23,14 +23,14 @@ importers:
   packages/electron-redux:
     specifiers:
       '@types/jest': ^27.0.0
-      electron: ^13.1.6
+      electron: ^14.0.0
       jest: ^27.0.6
       redux: ^4.1.0
       ts-jest: ^27.0.3
       typescript: ^4.3.5
     devDependencies:
       '@types/jest': 27.4.0
-      electron: 13.1.6
+      electron: 14.2.5
       jest: 27.0.6
       redux: 4.1.0
       ts-jest: 27.0.3_jest@27.0.6+typescript@4.3.5
@@ -2022,6 +2022,19 @@ packages:
 
   /electron/13.1.6:
     resolution: {integrity: sha512-XiB55/JTaQpDFQrD9pulYnOGwaWeMyRIub5ispvoE2bWBvM5zVMLptwMLb0m3KTMrfSkzhedZvOu7fwYvR7L7Q==}
+    engines: {node: '>= 8.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@electron/get': 1.12.4
+      '@types/node': 14.17.5
+      extract-zip: 1.7.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /electron/14.2.5:
+    resolution: {integrity: sha512-L5Y0s3LOAKtHYFQanxULZxfZzxkldNvCyfsFiiNwo7rMi1M+THKfSHCgDarHluSIGc4NvOEomV7P1RL97qpr6A==}
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
