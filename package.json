@@ -9,7 +9,7 @@
   "repository": "https://github.com/goosewobbler/electron-redux",
   "bugs": "https://github.com/goosewobbler/electron-redux/issues",
   "devDependencies": {
-    "@mckayla/eslint-plugin": "^0.1.10",
+    "@mckayla/eslint-plugin": "^0.13.0",
     "@types/jest": "^27.0.0",
     "eslint": "^7.30.0",
     "jest": "^27.0.6",
