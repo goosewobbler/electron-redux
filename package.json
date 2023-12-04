@@ -10,11 +10,11 @@
   "bugs": "https://github.com/goosewobbler/electron-redux/issues",
   "devDependencies": {
     "@mckayla/eslint-plugin": "^0.1.10",
-    "@types/jest": "^27.0.0",
+    "@types/jest": "^28.0.0",
     "eslint": "^7.30.0",
-    "jest": "^27.0.6",
+    "jest": "^28.0.0",
     "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^28.0.0",
     "typescript": "^4.3.5"
   },
   "scripts": {
